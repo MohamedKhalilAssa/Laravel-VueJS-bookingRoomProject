@@ -1,7 +1,7 @@
 <template>
     <div class="card-container">
         <div class="imgContainer">
-            <img  :src=image alt="Hotel Room" class="hotel-room-image" />
+            <img  :src="image" alt="Hotel Room" class="hotel-room-image" />
         </div>
         <div class="hotel-room-info">
           <h1 style="font-size: 1.5rem; font-weight: 600;" class="hotel-room-title">{{ hotel.title }}</h1>
@@ -19,6 +19,7 @@ import { computed } from "vue"
 
 
 const props = defineProps(['hotel'])
+
 
 const image = computed(() => {
     return JSON.parse(props.hotel.image)

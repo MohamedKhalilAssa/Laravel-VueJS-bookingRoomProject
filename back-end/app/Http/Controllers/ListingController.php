@@ -24,14 +24,15 @@ class ListingController extends Controller
                 "title" => 'required|string|max:255',
                 "address" => 'required',
                 "description" => 'required',
-                'image' => 'image|mimes:jpeg,png,pdf|max:2048',
+                'image.*' => 'image|mimes:jpeg,png,pdf|max:2048',
             ]);
 
-            if($request->hasFile('image')){
-                $path = $request->file('image')->store('images','public');
-                $formElements['image'] = json_encode($path);
-            }
-
+                $paths = [];
+                foreach($request->file('image') as $image){
+                    $path = 'http://localhost:8000/storage/' . $image->store('images','public');
+                    $paths[] = $path;
+                }
+                $formElements['image'] = json_encode($paths);
             // validating amneties
             if($request->amenities){
                 foreach($request->amenities as $amenity){

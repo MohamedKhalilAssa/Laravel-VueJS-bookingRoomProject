@@ -126,7 +126,7 @@
             <div class="mb-6 flex justify-between items-center">
                 
                 <button class="bg-dark text-white rounded py-2 px-4 hover:scale-105 duration-300">
-                    Create Gig
+                    Create Listing
                 </button>
                 
                 <a href="/" class="text-black ml-4"> Back </a>
@@ -139,6 +139,10 @@
 <script setup>
 import { ref, watchEffect } from 'vue'
 import axios from 'axios'
+import { useRouter } from 'vue-router';
+
+let formData = new FormData()
+const router = useRouter()
 
 const form = ref({
     title: null,
@@ -147,24 +151,17 @@ const form = ref({
     price_per_night: null,
     amenities: [],
 })
-watchEffect(() => {
-    
-    console.log(form.value.amenities)
-})
 
-// Reference to the file input element
 // Reference to the file input element
 const files = ref(null)
 // Method to upload files to the server{
 const handleFileChange = (e) => {
-    files.value = e.target.files[0]
-    
+    formData.append('image[]', e.target.files[0]);
 }
 
-
+// uploading files
 const uploadFiles = async () => {
     
-    let formData = new FormData()
     formData.append('image', files.value)
     formData.append('title', form.value.title)
     formData.append('description', form.value.description)
@@ -180,13 +177,16 @@ const uploadFiles = async () => {
   try {
     // Send the FormData object to the server using axios
     await axios.post('http://localhost:8000/create',  formData).then(response => {
-        console.log(response)
+        router.push({name: 'Listings'})
     })
     
   } catch (error) {
     console.error(error)
   }
 }
+
+
+
 </script>
 
 <style>

@@ -14,8 +14,8 @@
                 <router-link class="links" to="/register">Register</router-link>
             </div>
             <div v-else class="other">
+                <router-link to="/create" class="links"  ><i class="fas fa-pen"></i> Create a Listing </router-link>
                 <button class="links" @click="logoutHandling" >Logout <i class="fas fa-door-open"></i></button>
-
             </div>
           </div>
     </nav>

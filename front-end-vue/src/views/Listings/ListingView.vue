@@ -1,7 +1,7 @@
 <template>
 <div v-if="show" class="container-style">
     <div class="imgField">
-        <img :src="listing.image" alt="Hotel Image">
+        <img :src="image" alt="Hotel Image">
     </div>
     <div class="textField">
         <h1>{{listing.title}}</h1>
@@ -21,13 +21,13 @@
 </template>
 
 <script setup>
-import { defineProps } from 'vue';
+import { computed, defineProps } from 'vue';
+import {ref, watchEffect } from "vue"
+import getListing from "@/composables/getListing"
 
 
 const props = defineProps(['id'])
 
-import {ref, watchEffect } from "vue"
-import getListing from "@/composables/getListing"
 
 // to avoid showing while still fetching
 let show = ref(false);
@@ -37,11 +37,14 @@ const {listing,errors,loadPost} = getListing()
 
 loadPost(props.id)
 
+let image;
 
 watchEffect(()=>{
-  if(listing.value){
-    show.value = true;    
-
+    if(listing.value){
+        show.value = true;    
+         image = computed(() => {
+            return JSON.parse(listing.value.image)[0]
+        })
   }
 })
 
@@ -82,7 +85,8 @@ h1{
 .imgField img{
     width: 100%;
     height:100%;
-    object-fit: cover;
+    object-fit: contain;
+
 }
 /* styling texts */
 .textField{
@@ -102,5 +106,6 @@ hr{
     .textField{
         width:95%;
     }
+    
 }
 </style>
