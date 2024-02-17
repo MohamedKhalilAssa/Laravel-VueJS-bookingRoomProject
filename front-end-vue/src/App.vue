@@ -4,7 +4,7 @@
 </template>
 
 <script setup>
-import { onMounted } from "vue"
+import { onMounted, onUpdated } from "vue"
 import { useStore } from "vuex"
 import Navbar from "./components/NavBar.vue"
 

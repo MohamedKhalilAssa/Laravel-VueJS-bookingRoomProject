@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ListingController;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,6 +14,9 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
+Route::post('/create',[ListingController::class,'store']);
 
 Route::get('/', function () {
     return ['Laravel' => app()->version()];

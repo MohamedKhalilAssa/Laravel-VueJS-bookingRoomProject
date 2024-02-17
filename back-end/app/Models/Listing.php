@@ -10,6 +10,8 @@ class Listing extends Model
 {
     use HasFactory;
 
+    protected $guarded = [];
+
     protected $casts = [
         'amenity_wifi' => 'boolean',
         'amenity_pets' => 'boolean',

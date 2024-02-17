@@ -79,6 +79,7 @@ const LoginHandling = async () =>{
 
         router.push({name: 'Listings'})
     } catch (error){
+        
         if(error.response){
             errors.value = error.response.data.errors ?? null 
         }

@@ -20,7 +20,28 @@ class ListingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+            $formElements = $request->validate([
+                "title" => 'required|string|max:255',
+                "address" => 'required',
+                "description" => 'required',
+                'image' => 'image|mimes:jpeg,png,pdf|max:2048',
+            ]);
+
+            if($request->hasFile('image')){
+                $path = $request->file('image')->store('images','public');
+                $formElements['image'] = json_encode($path);
+            }
+
+            // validating amneties
+            if($request->amenities){
+                foreach($request->amenities as $amenity){
+                    $formElements[$amenity] = true;
+                }
+            }
+
+            Listing::create($formElements);
+
+            return "done";
     }
 
     /**
