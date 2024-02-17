@@ -8,7 +8,7 @@ const getListing =  () => {
 
     const loadPost = async (id) => {
         try{
-                const res = await fetch('http://api.bookhotel.test/api/listings/'+ id)
+                const res = await fetch('http://localhost:8000/api/listings/'+ id)
                 if(!res.ok){
                     throw Error('could not fetch the data for that resource')
                 }

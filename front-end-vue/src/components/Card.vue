@@ -4,7 +4,7 @@
             <img  :src="hotel.image" alt="Hotel Room" class="hotel-room-image" />
         </div>
         <div class="hotel-room-info">
-          <h1 class="hotel-room-title">{{ hotel.title }}</h1>
+          <h1 style="font-size: 1.5rem; font-weight: 600;" class="hotel-room-title">{{ hotel.title }}</h1>
           <p class="hotel-room-description">{{hotel.address}}</p>
           <p class="hotel-room-price"><strong>${{hotel.price_per_night ?? 0}}/night</strong></p>
           <router-link :to="'/listings/'+ hotel.id">

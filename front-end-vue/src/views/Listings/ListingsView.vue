@@ -20,6 +20,8 @@ loadPosts()
 
 let computedListings = computed(()=>null)
 
+
+
 watchEffect(()=>{
   if(listings.value.data){
     show.value = true;

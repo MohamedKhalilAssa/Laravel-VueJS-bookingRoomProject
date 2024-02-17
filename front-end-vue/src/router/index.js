@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import ListingsView from '@/views/Listings/ListingsView.vue'
 import ListingView from '@/views/Listings/ListingView.vue'
-import RegisterView from '@/views/RegisterView.vue'
-import LoginView from '@/views/LoginView.vue'
+import RegisterView from '@/views/Users/RegisterView.vue'
+import LoginView from '@/views/Users/LoginView.vue'
 
 const routes = [
   {
@@ -21,12 +21,18 @@ const routes = [
   {
     path: '/register',
     name: 'Register',
-    component: RegisterView
+    component: RegisterView,
+    meta:{
+      requiresGuest : true
+    }
   },
   {
     path: '/login',
     name: 'Login',
-    component: LoginView
+    component: LoginView,
+    meta: {
+      requiresGuest: true
+    }
   }
 ]
 
@@ -34,5 +40,16 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes
 })
+
+// guarding routes 
+
+router.beforeEach((to, from, next) => {
+  if(to.meta.requiresGuest && localStorage.getItem('Authentication')){
+    next({name: 'Listings'})
+  } else {
+    next()
+  }
+})
+
 
 export default router

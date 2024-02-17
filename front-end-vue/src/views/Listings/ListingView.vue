@@ -54,12 +54,8 @@ const  moreText = `Lorem ipsum dolor sit amet consectetur, adipisicing elit. Exc
         Nihil, quisquam officia totam in voluptas doloremque, at illum molestiae omnis magnam harum nesciunt, dignissimos tenetur sunt laborum soluta earum. Repellendus delectus error provident ipsam. Aliquid eligendi placeat pariatur repellat?
         Perspiciatis tempora amet beatae, repellendus consequatur magni temporibus repudiandae! Iste architecto suscipit temporibus autem cumque eum laudantium quam harum sint! Quis, porro ullam tempora modi ea esse dolor repellendus praesentium!
         Ipsum quia temporibus, debitis inventore ipsa laudantium earum velit vero praesentium, voluptate error? Nam, aliquam magni, non porro amet neque consequuntur, nisi soluta laudantium voluptatibus eos adipisci saepe officiis quisquam!
-        Illum, perspiciatis numquam quasi provident ad repellendus modi iusto reiciendis molestias sint odio? Error placeat recusandae perferendis repudiandae, culpa unde ex nostrum? Culpa similique et laboriosam maiores adipisci voluptatibus. Nobis.
-        Eligendi laboriosam culpa tempora corporis eos obcaecati amet fugit nesciunt vel! Ducimus ipsa deserunt incidunt architecto, quasi explicabo expedita assumenda, minus inventore, similique illo nobis ex necessitatibus repudiandae. Tempora, totam?
-        Nemo corrupti quibusdam repellat, eaque consequatur fugiat molestiae eum sunt officia consectetur repellendus, perspiciatis laboriosam exercitationem reiciendis quis! Repudiandae, quod expedita recusandae ducimus reiciendis quis ipsa. Omnis, temporibus! Quia, officiis?
-        Consectetur, iusto itaque harum facere consequuntur quod laborum molestias architecto repellat optio dignissimos ipsam beatae perferendis voluptates sapiente officiis voluptatum vitae numquam tempore cupiditate distinctio dolores delectus provident? Quis, ut?
-        Quis perferendis consequuntur voluptas aspernatur, debitis iste fugit, omnis sunt minima illo labore aut, quam est? Adipisci placeat repellendus voluptatibus, aperiam neque autem architecto harum dolor! Dolores blanditiis ea a!
-        Libero molestiae omnis dolore odit minima hic repellat, reiciendis, ipsa ratione ut fugiat voluptatibus iusto dolor. Distinctio, dolor dolore. Necessitatibus praesentium itaque adipisci id animi explicabo laborum quam ad maxime.`</script>
+        `
+</script>
 
 <style scoped>
 * {

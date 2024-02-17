@@ -4,8 +4,15 @@
 </template>
 
 <script setup>
+import { onMounted } from "vue"
+import { useStore } from "vuex"
 import Navbar from "./components/NavBar.vue"
 
+onMounted(() => {
+  const store = useStore()
+  store.commit('setAuthentication')
+  store.commit('setUser')
+})
 </script>
 <style>
 #app {

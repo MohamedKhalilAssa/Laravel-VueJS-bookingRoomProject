@@ -1,7 +1,6 @@
 <template>
     <nav ref="nav"  id="nav" class="bg-white">
         <router-link to="/"><p class="brand">WanderStay</p></router-link>
-
       
   
           <div ref="btn" class="hamburger" @click="toggleMenu">
@@ -10,23 +9,63 @@
               <span class="layer"></span>
           </div>
           <div  class="linksHolder">
-              <router-link class="links" to="/login">Login</router-link>
-              <router-link class="links" to="/register">Register</router-link>
+            <div v-if="!isAuthenticated" class="guest">
+                <router-link class="links" to="/login">Login</router-link>
+                <router-link class="links" to="/register">Register</router-link>
+            </div>
+            <div v-else class="other">
+                <button class="links" @click="logoutHandling" >Logout <i class="fas fa-door-open"></i></button>
+
+            </div>
           </div>
     </nav>
   </template>
   
   <script setup>
-  import { ref } from 'vue'
-  
-  const btn = ref('btn')
-  const nav = ref('nav')
-  
+import { ref, computed, mapGetters, watch } from 'vue'
+import { useStore } from 'vuex';
+import axios from "axios"
+import { useRouter } from 'vue-router';
+
+//   hamburger configuration
+  const btn = ref(null)
+  const nav = ref(null)
+
+  const store = useStore()
+  let isAuthenticated = computed(() => store.getters.getAuthentication)
+
+
+
   const toggleMenu = ()=>{
-      btn.value.classList.toggle('active');
-      nav.value.classList.toggle('collapse')
+      btn.value.classList.toggle('active')
+      nav.value.classList.toggle('bigger')
   }
-  </script>
+
+
+ 
+
+
+const router = useRouter()
+
+const logoutHandling  = async ()=>{
+    axios.defaults.withCredentials = true
+    axios.defaults.withXSRFToken = true
+    try{
+        await axios.post('http://localhost:8000/logout')
+
+    // taking out the user from storage/store
+        localStorage.removeItem('Authentication')
+        localStorage.removeItem('User')
+        store.commit('setAuthentication')
+        store.commit('setUser')
+
+    } catch (error){
+        console.log(error)
+    }
+    router.push({name: 'Listings'})
+}
+
+</script>
   
   <style scoped>
   /* to cancel scss effect  */
@@ -143,7 +182,7 @@
           rotate: 45deg;
       }
       
-      #nav.collapse .linksHolder{
+      #nav.bigger .linksHolder{
           display: block;
           position: absolute;
           top:12vh;
@@ -162,7 +201,7 @@
           display: none;
       }
      
-      #nav.collapse{
+      #nav.bigger{
           height:40vh;
       }
   }
