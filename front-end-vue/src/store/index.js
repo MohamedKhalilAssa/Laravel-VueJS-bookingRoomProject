@@ -15,21 +15,10 @@ export default createStore({
   },
   mutations: {
     setAuthentication (state) {
-      if(localStorage.getItem('Authentication')){
-        console.log('localStorage')
-        state.authentication = localStorage.getItem('Authentication') 
-      }
-      else{
-        console.log('false')
-
-        state.authentication = false
-      }
+      state.authentication = localStorage.getItem('Authentication') ?? false
     },
     setUser (state) {
-      if(localStorage.getItem('User'))
-        state.user = localStorage.getItem('User')
-      else
-        state.user = null
+      state.user = localStorage.getItem('User') ?? null
     }
   },
   actions: {
