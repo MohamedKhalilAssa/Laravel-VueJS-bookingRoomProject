@@ -1,5 +1,5 @@
 import { ref } from "vue";
-
+import axios from 'axios';
 const getListingByUser =  () => {
     
     const listings = ref([])
@@ -8,13 +8,18 @@ const getListingByUser =  () => {
 
     const loadListings = async (id) => {
         try{
-                const res = await fetch('http://localhost:8000/api/listings/User/'+ id)
-                if(!res.ok){
+            axios.defaults.withCredentials = true
+            axios.defaults.withXSRFToken = true
+
+                const res = await axios.get('http://localhost:8000/api/listings/User/'+ id)
+                
+                if(res.statusText != 'OK'){
                     throw Error('could not fetch the data for that resource')
                 }
-                
-                listings.value = await res.json()
 
+
+                const {data} = res
+                listings.value = data
 
         } catch(err){
             errors.value = err

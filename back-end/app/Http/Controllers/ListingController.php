@@ -8,6 +8,10 @@ use Illuminate\Http\Request;
 
 class ListingController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum')->except(['index', 'show']);
+    }
     /**
      * Display a listing of the resource.
      */
@@ -61,7 +65,7 @@ class ListingController extends Controller
     // get by User
     public function getByUser($id)
     {
-        return User::find($id)->listings->toJson();
+        return User::find($id)->listings()->orderBy('created_at', 'desc')->get()->toJson();
     }
 
 

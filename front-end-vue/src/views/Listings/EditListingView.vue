@@ -57,16 +57,6 @@
                 </div>
 
             </div>
-
-            <div class="mb-6">
-                <label for="logo" class="inline-block text-lg mb-2">
-                    Company Logo
-                </label>
-                <input @change="handleFileChange" ref="files" type="file" class="border border-gray-200 rounded p-2 w-full"
-                    name="image" multiple />
-
-            </div>
-
             <div class="mb-6 flex justify-between items-center">
 
                 <button class="bg-dark text-white rounded py-2 px-4 hover:scale-105 duration-300">
