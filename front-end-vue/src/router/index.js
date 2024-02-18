@@ -2,6 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 import ListingsView from '@/views/Listings/ListingsView.vue'
 import ListingView from '@/views/Listings/ListingView.vue'
 import CreateListingView from '@/views/Listings/CreateListingView.vue'
+import EditListingView from '@/views/Listings/EditListingView.vue'
+import ManageListingView from '@/views/Listings/ManageListingView.vue'
 import RegisterView from '@/views/Users/RegisterView.vue'
 import LoginView from '@/views/Users/LoginView.vue'
 import axios from 'axios'
@@ -41,6 +43,23 @@ const routes = [
     path: '/create',
     name: 'Create',
     component: CreateListingView,
+    meta: {
+      requiresAuthentication: true
+    }
+  },  
+  {
+    path: '/edit/:id',
+    name: 'Edit',
+    component: EditListingView,
+    meta: {
+      requiresAuthentication: true
+    },
+    props: true
+  },  
+  {
+    path: '/manage',
+    name: 'Manage',
+    component: ManageListingView,
     meta: {
       requiresAuthentication: true
     }

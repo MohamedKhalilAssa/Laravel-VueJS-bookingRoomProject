@@ -1,14 +1,14 @@
 import { ref } from "vue";
 
-const getListings =  () => {
+const getListingByUser =  () => {
     
     const listings = ref([])
     const errors = ref(null)
     
 
-    const loadPosts = async (page = 1) => {
+    const loadListings = async (id) => {
         try{
-                const res = await fetch('http://localhost:8000/api/listings?page=' + page)
+                const res = await fetch('http://localhost:8000/api/listings/User/'+ id)
                 if(!res.ok){
                     throw Error('could not fetch the data for that resource')
                 }
@@ -22,15 +22,8 @@ const getListings =  () => {
     }
 
 
-    return {listings,errors,loadPosts}
+    return {listings,errors,loadListings}
 }
 
 
-
-
-
-
-
-
-
-export default getListings;
+export default getListingByUser;

@@ -1,12 +1,16 @@
 <template>
-  <Navbar/>
-  <router-view/>
+  <main class="mb-24">
+    <Navbar/>
+    <router-view/>
+  </main>
+  <Foooter />
 </template>
 
 <script setup>
 import { onMounted, onUpdated } from "vue"
 import { useStore } from "vuex"
 import Navbar from "./components/NavBar.vue"
+import Foooter from '@/components/Footer.vue'
 
 onMounted(() => {
   const store = useStore()

@@ -22,13 +22,18 @@ class Listing extends Model
         'amenity_air_conditioning' => 'boolean',
     ];
 
-    public function scopeFilter($query,array $filters)
+    public function scopeFilter($query, array $filters)
     {
         if ($filters['search'] ?? false) {
-            $query->where('title' , 'like', '%' . $filters['search']. '%')
-            ->where('address', 'like', '%' . $filters['search'] . '%')
-            ->where('description', 'like', '%' . $filters['search'] . '%')
-            ->where('price_per_night', 'like', '%' .$filters['search'] . '%');
+            $query->where('title', 'like', '%' . $filters['search'] . '%')
+                ->where('address', 'like', '%' . $filters['search'] . '%')
+                ->where('description', 'like', '%' . $filters['search'] . '%')
+                ->where('price_per_night', 'like', '%' . $filters['search'] . '%');
         }
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 }

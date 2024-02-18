@@ -18,7 +18,7 @@ export default createStore({
       state.authentication = localStorage.getItem('Authentication') ?? false
     },
     setUser (state) {
-      state.user = localStorage.getItem('User') ?? null
+      state.user = JSON.parse(localStorage.getItem('User')) ?? null
     }
   },
   actions: {

@@ -20,6 +20,8 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
+
+
     public function store(Request $request): JsonResponse
     {
         $validator = Validator::make($request->all(), [
@@ -28,8 +30,8 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
         ]);
 
-        if($validator->fails()){
-            return response()->json(['errors' => $validator->errors()],422);
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
         }
 
         $user = User::create([
@@ -39,6 +41,7 @@ class RegisteredUserController extends Controller
         ]);
 
         // event(new Registered($user));
+
 
         Auth::login($user);
 

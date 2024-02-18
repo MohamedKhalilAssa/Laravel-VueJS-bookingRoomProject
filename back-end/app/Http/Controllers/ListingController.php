@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Listing;
 use Illuminate\Http\Request;
 
@@ -12,7 +13,7 @@ class ListingController extends Controller
      */
     public function index()
     {
-       return Listing::latest()->filter(request(['search']))->paginate(6)->toJson();
+        return Listing::latest()->filter(request(['search']))->paginate(6)->toJson();
     }
 
     /**
@@ -20,29 +21,33 @@ class ListingController extends Controller
      */
     public function store(Request $request)
     {
-            $formElements = $request->validate([
-                "title" => 'required|string|max:255',
-                "address" => 'required',
-                "description" => 'required',
-                'image.*' => 'image|mimes:jpeg,png,pdf|max:2048',
-            ]);
+        $formElements = $request->validate([
+            "title" => 'required|string|max:255',
+            "address" => 'required',
+            "description" => 'required',
+            'image.*' => 'image|mimes:jpeg,png,pdf|max:2048',
+        ]);
 
-                $paths = [];
-                foreach($request->file('image') as $image){
-                    $path = 'http://localhost:8000/storage/' . $image->store('images','public');
-                    $paths[] = $path;
-                }
-                $formElements['image'] = json_encode($paths);
-            // validating amneties
-            if($request->amenities){
-                foreach($request->amenities as $amenity){
-                    $formElements[$amenity] = true;
-                }
+        $paths = [];
+        if ($request->file('image')) {
+            foreach ($request->file('image') as $image) {
+                $path = 'http://localhost:8000/storage/' . $image->store('images', 'public');
+                $paths[] = $path;
             }
+            $formElements['image'] = json_encode($paths);
+        }
+        // validating amneties
+        if ($request->amenities) {
+            foreach ($request->amenities as $amenity) {
+                $formElements[$amenity] = true;
+            }
+        }
 
-            Listing::create($formElements);
+        $formElements['user_id'] = auth()->user()->id;
 
-            return "done";
+        Listing::create($formElements);
+
+        return "Listing Created Successfully" . auth()->user()->id;
     }
 
     /**
@@ -52,6 +57,13 @@ class ListingController extends Controller
     {
         return Listing::find($id)->toJson();
     }
+
+    // get by User
+    public function getByUser($id)
+    {
+        return User::find($id)->listings->toJson();
+    }
+
 
     /**
      * Update the specified resource in storage.
@@ -64,8 +76,15 @@ class ListingController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $listing = Listing::find($id);
+
+        if ($listing->user_id == auth()->user()->id) {
+            $listing->delete();
+            return "Listing Deleted Successfully";
+        } else {
+            abort(403, 'Unauthorized action.');
+        }
     }
 }

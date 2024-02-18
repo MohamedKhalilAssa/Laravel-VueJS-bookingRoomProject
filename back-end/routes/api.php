@@ -24,7 +24,11 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 
 Route::prefix('listings')->group(function () {
     //* show all listings
-    Route::get('/',[ListingController::class,'index']);
+    Route::get('/', [ListingController::class, 'index']);
     //* show a listing
-    Route::get('/{id}',[ListingController::class,'show']);
+    Route::get('/{id}', [ListingController::class, 'show'])->where('id', '[0-9]+');
+    // get Listings by user
+    Route::get('/User/{user_id}', [ListingController::class, 'getByUser'])->where('user_id', '[0-9]+');
+    // delete
+    Route::delete('/{id}', [ListingController::class, 'destroy'])->where('id', '[0-9]+');
 });

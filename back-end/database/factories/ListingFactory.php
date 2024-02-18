@@ -20,6 +20,7 @@ class ListingFactory extends Factory
             'title' => fake()->sentence(),
             'address' => fake()->address(),
             'description' => $this->faker->paragraph(5),
+            'user_id' => 1
         ];
     }
 }

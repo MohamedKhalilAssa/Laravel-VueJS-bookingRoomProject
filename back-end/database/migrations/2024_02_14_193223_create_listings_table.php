@@ -13,17 +13,18 @@ return new class extends Migration
     {
         Schema::create('listings', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(\App\Models\User::class, 'user_id');
             $table->string('title');
             $table->string('address');
             $table->longText('description');
-            $table->json('image')->default(json_encode('http://localhost:8000/storage/images/no-image.png'));
+            $table->json('image')->default(json_encode('http://localhost:8000/storage/images/no-image.jpg'));
             // amenities
             $table->boolean('amenity_wifi')->default(false);
             $table->boolean('amenity_pets')->default(false);
             $table->boolean('amenity_tv')->default(false);
             $table->boolean('amenity_air_conditioning')->default(false);
             // prices
-            $table->decimal('price_per_night',6,2)->nullable();
+            $table->decimal('price_per_night', 6, 2)->nullable();
 
             $table->timestamps();
         });

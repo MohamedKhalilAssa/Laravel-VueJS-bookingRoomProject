@@ -66,7 +66,6 @@ const form = ref({
     password_confirmation: null,
 })
 
-const user = ref(null)
 const errors = ref(null)
 const router = useRouter()
 const store = useStore()
@@ -85,6 +84,7 @@ const RegisterHandling = async () =>{
 
         let {data} = await axios.get('http://localhost:8000/api/user')
 
+    console.log(data)
         localStorage.setItem('Authentication', true)
         localStorage.setItem('User', JSON.stringify(data))
         store.commit('setAuthentication')
@@ -92,6 +92,7 @@ const RegisterHandling = async () =>{
 
         router.push({name: 'Listings'})
     } catch (error){
+        console.log(error)
         if(error.response){
             errors.value = error.response.data.errors ?? null 
         }
